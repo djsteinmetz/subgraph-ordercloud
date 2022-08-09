@@ -1,0 +1,30 @@
+extend schema @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"])
+
+type Query {
+    "The full list of addresses available to a buyer"
+    addresses(buyerID: ID!): [Address!]!
+    "The details of a specific address"
+    address(buyerID: ID!, id: ID!): Address
+}
+
+type Address {
+    id: ID!
+    "The name of the address"
+    addressName: String!
+    "The street address Street 1"
+    street1: String!
+    "The street address Street 2"
+    street2: String
+    "The address' city"
+    city: String!
+    "The address' state"
+    state: String!
+    "The address' zip code"
+    zip: String!
+    "The country the address is in"
+    country: String!
+    "The first name of the primary contact for this mailing address"
+    firstName: String!
+    "The family name of the primary contact for this mailing address"
+    lastName: String!
+}
