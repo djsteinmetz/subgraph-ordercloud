@@ -4,17 +4,17 @@
     "description": "The subgraph for Sitecore Ordercloud",
     "main": "index.js",
     "scripts": {
-      "start": "nodemon . -e js,graphql"
+        "start": "nodemon . -e js,graphql"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "@apollo/subgraph": "^2.0.5",
-      "apollo-server": "^3.4.0",
-      "fs": "0.0.1-security",
-      "graphql": "^16.0.0",
-      "nodemon": "^2.0.13"
+        "@apollo/subgraph": "^2.0.5",
+        "apollo-datasource-rest": "^3.6.1",
+        "apollo-server": "^3.4.0",
+        "fs": "0.0.1-security",
+        "graphql": "^16.0.0",
+        "nodemon": "^2.0.13"
     }
-  }
-  
+}

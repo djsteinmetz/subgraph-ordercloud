@@ -1,13 +1,14 @@
 const {ApolloServer, gql} = require('apollo-server');
 const {readFileSync} = require('fs');
-const {buildSubgraphSchema} = require('@apollo/subgraph');
+// const {buildSubgraphSchema} = require('@apollo/subgraph');
 
 const typeDefs = gql(readFileSync('./ordercloud.graphql', {encoding: 'utf-8'}));
 const resolvers = require('./resolvers');
 const OrderCloudAPI = require('./datasources/ordercloud-api');
 
 const server = new ApolloServer({
-  schema: buildSubgraphSchema({typeDefs, resolvers}),
+  typeDefs,
+  resolvers,
   dataSources: () => {
     return {
       ordercloudAPI: new OrderCloudAPI()
