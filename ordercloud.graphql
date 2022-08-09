@@ -9,6 +9,8 @@ type Query {
 
 type Address {
     id: ID!
+    "The ID of the Buyer"
+    buyerID: String!
     "The name of the address"
     addressName: String!
     "The street address Street 1"
@@ -27,4 +29,14 @@ type Address {
     firstName: String
     "The family name of the primary contact for this mailing address"
     lastName: String
+    xp: String
+    assignments: [AddressAssignment!]!
+}
+
+type AddressAssignment {
+    assignmentType: String!
+    name: String!
+    isShipping: Boolean
+    isBilling: Boolean
+    description: String
 }

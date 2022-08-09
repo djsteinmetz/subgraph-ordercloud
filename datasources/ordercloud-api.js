@@ -18,6 +18,10 @@ class OrderCloudAPI extends RESTDataSource {
     getAddress(buyerID, id) {
         return this.get(`/buyers/${buyerID}/addresses/${id}`)
     }
+
+    getAddressAssignments(buyerID, id) {
+        return this.get(`/buyers/${buyerID}/addresses/assignments?addressID=${id}`)
+    }
 }
 
 module.exports = OrderCloudAPI;
