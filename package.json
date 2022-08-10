@@ -2,9 +2,9 @@
     "name": "ordercloud",
     "version": "1.0.0",
     "description": "The subgraph for Sitecore Ordercloud",
-    "main": "index.js",
+    "main": "src/index.js",
     "scripts": {
-        "start": "nodemon . -e js,graphql"
+        "start": "nodemon ./src -e js,graphql"
     },
     "keywords": [],
     "author": "",

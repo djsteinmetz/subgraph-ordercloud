@@ -12,7 +12,7 @@ type Address {
     "The ID of the Buyer"
     buyerID: String!
     "The name of the address"
-    addressName: String!
+    addressName: String
     "The street address Street 1"
     street1: String!
     "The street address Street 2"
@@ -30,7 +30,7 @@ type Address {
     "The family name of the primary contact for this mailing address"
     lastName: String
     xp: String
-    assignments: [AddressAssignment!]!
+    assignments: [AddressAssignment!]
 }
 
 type AddressAssignment {

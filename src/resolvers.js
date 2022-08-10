@@ -2,6 +2,7 @@ const resolvers = {
     Query: {
       addresses: async (_, {buyerID}, { dataSources }) => {
         const addressesListPage = await dataSources.ordercloudAPI.getAllAddresses(buyerID)
+        console.log(addressesListPage)
         return addressesListPage.Items.map(a => {
             return {
                 id: a.ID,
@@ -22,6 +23,7 @@ const resolvers = {
       address: async (_, { buyerID, id }, { dataSources, token }) => {
         try {
             const address = await dataSources.ordercloudAPI.getAddress(buyerID, id);
+            console.log(address)
             return {
                 id: address.ID,
                 buyerID,
