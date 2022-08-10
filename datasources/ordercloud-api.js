@@ -4,7 +4,7 @@ class OrderCloudAPI extends RESTDataSource {
     constructor() {
         super();
         // the Catstronauts catalog is hosted on this server
-        this.baseURL = 'https://api.ordercloud.io/v1';
+        this.baseURL = 'https://sandboxapi.ordercloud.io/v1';
     }
 
     willSendRequest(request) {
@@ -21,6 +21,18 @@ class OrderCloudAPI extends RESTDataSource {
 
     getAddressAssignments(buyerID, id) {
         return this.get(`/buyers/${buyerID}/addresses/assignments?addressID=${id}`)
+    }
+
+    getUserGroup(buyerID, id) {
+        return this.get(`/buyers/${buyerID}/usergroups/${id}`)
+    }
+
+    getUser(buyerID, id) {
+        return this.get(`/buyers/${buyerID}/users/${id}`)
+    }
+
+    getBuyer(buyerID) {
+        return this.get(`/buyers/${buyerID}`)
     }
 }
 

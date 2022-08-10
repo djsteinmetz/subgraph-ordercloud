@@ -34,9 +34,17 @@ type Address {
 }
 
 type AddressAssignment {
-    assignmentType: String!
-    name: String!
+    entityID: ID!
+    buyerID: ID!
+    type: String!
     isShipping: Boolean
     isBilling: Boolean
+    entity: Entity
+}
+
+type Entity {
+    id: ID!
+    type: String!
+    name: String!
     description: String
 }

@@ -17,9 +17,6 @@ const server = new ApolloServer({
   context: ({req}) => {
     return {token: req.headers.authorization}
   },
-  formatError: (error) => {
-    return new Error("Something went wrong")
-  }
 });
 
 const port = process.env.PORT || 4001;

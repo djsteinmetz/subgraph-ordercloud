@@ -1,6 +1,6 @@
 const resolvers = {
     Query: {
-      addresses: async (_, {buyerID}, { dataSources, token }) => {
+      addresses: async (_, {buyerID}, { dataSources }) => {
         const addressesListPage = await dataSources.ordercloudAPI.getAllAddresses(buyerID)
         return addressesListPage.Items.map(a => {
             return {
@@ -45,17 +45,47 @@ const resolvers = {
       },
     },
     Address: {
-      assignments: async (parent, _, { dataSources }) => {
-        const assignments = await dataSources.ordercloudAPI.getAddressAssignments(parent.buyerID, parent.id)
+      assignments: async ({buyerID, id}, _, { dataSources }) => {
+        const assignments = await dataSources.ordercloudAPI.getAddressAssignments(buyerID, id)
         return assignments.Items.map(a => {
           return {
-            assignmentType: a.UserID ? "User" : "UserGroup",
-            name: "not-configured",
+            entityID: a.UserGroupID || a.UserID || buyerID,
+            buyerID,
+            type: a.UserID ? 'User' : a.UserGroupID ? 'UserGroup' : 'Buyer',
             isShipping: a.IsShipping,
             isBilling: a.IsBilling,
-            description: "not-configured"
           }
         })
+      }
+    },
+    AddressAssignment: {
+      entity: async ({buyerID, entityID, type}, _, { dataSources }) => {
+        let entity
+        if (type === 'UserGroup') {
+          entity = await dataSources.ordercloudAPI.getUserGroup(buyerID, entityID)
+          return {
+            id: entity.ID,
+            type,
+            name: entity.Name,
+            description: entity.Description
+          }
+        } else if (type === 'User') {
+          entity = await dataSources.ordercloudAPI.getUser(buyerID, entityID)
+          return {
+            id: entity.ID,
+            type,
+            name: `${entity?.FirstName} ${entity?.LastName}`,
+            description: null
+          }
+        } else if (type === 'Buyer') {
+          entity = await dataSources.ordercloudAPI.getBuyer(buyerID)
+          return {
+            id: buyerID,
+            type,
+            name: entity.Name,
+            description: entity.Description
+          }
+        }
       }
     }
   };
