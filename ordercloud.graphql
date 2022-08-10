@@ -36,7 +36,8 @@ type Address {
 type AddressAssignment {
     entityID: ID!
     buyerID: ID!
-    type: String!
+    type: String! @deprecated(reason: "Use level instead.")
+    level: String!
     isShipping: Boolean
     isBilling: Boolean
     entity: Entity
@@ -44,7 +45,6 @@ type AddressAssignment {
 
 type Entity {
     id: ID!
-    type: String!
     name: String!
     description: String
 }

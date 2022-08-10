@@ -51,7 +51,8 @@ const resolvers = {
           return {
             entityID: a.UserGroupID || a.UserID || buyerID,
             buyerID,
-            type: a.UserID ? 'User' : a.UserGroupID ? 'UserGroup' : 'Buyer',
+            type:  a.UserID ? 'User' : a.UserGroupID ? 'Group' : 'Company',
+            level: a.UserID ? 'User' : a.UserGroupID ? 'Group' : 'Company',
             isShipping: a.IsShipping,
             isBilling: a.IsBilling,
           }
@@ -59,29 +60,26 @@ const resolvers = {
       }
     },
     AddressAssignment: {
-      entity: async ({buyerID, entityID, type}, _, { dataSources }) => {
+      entity: async ({buyerID, entityID, level}, _, { dataSources }) => {
         let entity
-        if (type === 'UserGroup') {
+        if (level === 'Group') {
           entity = await dataSources.ordercloudAPI.getUserGroup(buyerID, entityID)
           return {
             id: entity.ID,
-            type,
             name: entity.Name,
             description: entity.Description
           }
-        } else if (type === 'User') {
+        } else if (level === 'User') {
           entity = await dataSources.ordercloudAPI.getUser(buyerID, entityID)
           return {
             id: entity.ID,
-            type,
             name: `${entity?.FirstName} ${entity?.LastName}`,
             description: null
           }
-        } else if (type === 'Buyer') {
+        } else if (level === 'Company') {
           entity = await dataSources.ordercloudAPI.getBuyer(buyerID)
           return {
             id: buyerID,
-            type,
             name: entity.Name,
             description: entity.Description
           }
