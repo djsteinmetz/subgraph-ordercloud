@@ -22,7 +22,7 @@ class OrderCloudAPI extends RESTDataSource {
 
     getAddressAssignments(buyerID, id) {
         console.log('here too')
-        return this.get(`/buyers/${buyerID}/addresses/assignments?addressID=${id}?pageSize=100`)
+        return this.get(`/buyers/${buyerID}/addresses/assignments?addressID=${id}&pageSize=100`)
     }
 
     getUserGroup(buyerID, id) {
