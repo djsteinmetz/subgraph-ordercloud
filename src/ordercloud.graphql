@@ -1,9 +1,4 @@
 # extend schema @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"])
-
-interface ListPage {
-    meta: Meta
-}
-
 type Meta {
     page: Int
     pageSize: Int
@@ -22,7 +17,7 @@ type Query {
     address(buyerID: ID!, id: ID!, userID: String, groupID: String, level: String): Address
 }
 
-type AddressListPage implements ListPage {
+type AddressListPage {
     meta: Meta
     items: [Address!]!
 }
@@ -51,7 +46,7 @@ type Address {
     assignments: AddressAssignmentListPage
 }
 
-type AddressAssignmentListPage implements ListPage {
+type AddressAssignmentListPage {
     meta: Meta
     items: [AddressAssignment!]
 }
