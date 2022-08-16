@@ -1,16 +1,34 @@
 # extend schema @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"])
 
+interface ListPage {
+    meta: Meta
+}
+
+type Meta {
+    page: Int
+    pageSize: Int
+    totalCount: Int
+    totalPages: Int
+    itemRange: [Int],
+    nextPageKey: String
+}
+
 type Query {
     "The full list of addresses available to a buyer"
-    addresses(buyerID: ID!): [Address!]!
+    addresses(buyerID: ID!, pageSize: Int, page: Int, search: String, searchOn: String): AddressListPage
+    "The full list of address assignments"
+    addressAssignments(buyerID: ID!, id: ID!, pageSize: Int, page: Int, userID: String, groupID: String, level: String): AddressAssignmentListPage
     "The details of a specific address"
-    address(buyerID: ID!, id: ID!): Address
+    address(buyerID: ID!, id: ID!, userID: String, groupID: String, level: String): Address
+}
+
+type AddressListPage implements ListPage {
+    meta: Meta
+    items: [Address!]!
 }
 
 type Address {
     id: ID!
-    "The ID of the Buyer"
-    buyerID: String!
     "The name of the address"
     addressName: String
     "The street address Street 1"
@@ -30,13 +48,17 @@ type Address {
     "The family name of the primary contact for this mailing address"
     lastName: String
     xp: String
-    assignments: [AddressAssignment!]
+    assignments: AddressAssignmentListPage
+}
+
+type AddressAssignmentListPage implements ListPage {
+    meta: Meta
+    items: [AddressAssignment!]
 }
 
 type AddressAssignment {
     entityID: ID!
     buyerID: ID!
-    type: String! @deprecated(reason: "Use level instead.")
     level: String!
     isShipping: Boolean
     isBilling: Boolean

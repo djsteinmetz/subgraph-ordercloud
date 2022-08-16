@@ -11,18 +11,21 @@ class OrderCloudAPI extends RESTDataSource {
         request.headers.set('Authorization', `${this.context.token}`);
     }
 
-    getAllAddresses(buyerID) {
-        console.log('here')
-        return this.get(`/buyers/${buyerID}/addresses?pageSize=100`);
+    getAllAddresses(buyerID, pageSize, page, search, searchOn) {
+        let url = `/buyers/${buyerID}/addresses?pageSize=${pageSize ?? 25}&page=${page ?? 1}`
+        if (search) url+=`&search=${search}`
+        if (searchOn) url+=`&searchOn=${searchON}`
+        return this.get(url)
     }
 
     getAddress(buyerID, id) {
         return this.get(`/buyers/${buyerID}/addresses/${id}?pageSize=100`)
     }
 
-    getAddressAssignments(buyerID, id) {
-        console.log('here too')
-        return this.get(`/buyers/${buyerID}/addresses/assignments?addressID=${id}&pageSize=100`)
+    getAddressAssignments(buyerId, addressID, page, pageSize, filterString) {
+        let url = `/buyers/${buyerId}/addresses/assignments?addressID=${addressID}&pageSize=${pageSize ?? 25}&page=${page ?? 1}`
+        if (filterString) url+=filterString
+        return this.get(url)
     }
 
     getUserGroup(buyerID, id) {
