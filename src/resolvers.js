@@ -3,6 +3,7 @@ const resolvers = {
   Query: {
     addresses: async (_, { buyerID, pageSize, page, search, searchOn }, { dataSources }) => {
       const addressesListPage = await dataSources.ordercloudAPI.getAllAddresses(buyerID, pageSize, page, search, searchOn)
+      console.log(addressListPage)
       return {
         meta: mapOcMetaToGql(addressesListPage.Meta),
         items: addressesListPage.Items.map(a => {
