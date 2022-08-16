@@ -37,6 +37,7 @@ class OrderCloudAPI extends RESTDataSource {
     }
 
     getBuyer(buyerID) {
+        console.log(buyerID)
         return this.get(`/buyers/${buyerID}`)
     }
 }

@@ -21,7 +21,7 @@ const resolvers = {
       return mapOcAddressToGql(address)
     },
     buyer: async(_, { buyerID }, { dataSources }) => {
-      const buyer = await dataSources.orderCloudAPI.getBuyer(buyerID);
+      const buyer = await dataSources.ordercloudAPI.getBuyer(buyerID);
       return mapOcBuyerToGql(buyer);
     }
   },
