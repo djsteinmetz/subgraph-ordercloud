@@ -1,13 +1,4 @@
 # extend schema @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"])
-type Meta {
-    page: Int
-    pageSize: Int
-    totalCount: Int
-    totalPages: Int
-    itemRange: [Int],
-    nextPageKey: String
-}
-
 type Query {
     "The full list of addresses available to a buyer"
     addresses(buyerID: ID!, pageSize: Int, page: Int, search: String, searchOn: String): AddressListPage
@@ -15,6 +6,15 @@ type Query {
     addressAssignments(buyerID: ID!, id: ID!, pageSize: Int, page: Int, userID: String, groupID: String, level: String): AddressAssignmentListPage
     "The details of a specific address"
     address(buyerID: ID!, id: ID!, userID: String, groupID: String, level: String): Address
+}
+
+type Meta {
+    page: Int
+    pageSize: Int
+    totalCount: Int
+    totalPages: Int
+    itemRange: [Int],
+    nextPageKey: String
 }
 
 type AddressListPage {
