@@ -6,6 +6,7 @@ type Query {
     addressAssignments(buyerID: ID!, id: ID!, pageSize: Int, page: Int, userID: String, groupID: String, level: String): AddressAssignmentListPage
     "The details of a specific address"
     address(buyerID: ID!, id: ID!, userID: String, groupID: String, level: String): Address
+    buyer(buyerID: ID!): Buyer
 }
 
 type Meta {
@@ -61,6 +62,12 @@ type AddressAssignment {
 }
 
 type Entity {
+    id: ID!
+    name: String!
+    description: String
+}
+
+type Buyer {
     id: ID!
     name: String!
     description: String

@@ -1,4 +1,4 @@
-const { mapOcAddressToGql, mapOcAssignmentToGql, mapOcMetaToGql } = require("./utils/mappers")
+const { mapOcAddressToGql, mapOcAssignmentToGql, mapOcMetaToGql, mapOcBuyerToGql } = require("./utils/mappers")
 const resolvers = {
   Query: {
     addresses: async (_, { buyerID, pageSize, page, search, searchOn }, { dataSources }) => {
@@ -20,6 +20,10 @@ const resolvers = {
       console.log(address)
       return mapOcAddressToGql(address)
     },
+    buyer: async(_, { buyerID }, { dataSources }) => {
+      const buyer = await dataSources.orderCloudAPI.getBuyer(buyerID);
+      return mapOcBuyerToGql(buyer);
+    }
   },
   Address: {
     assignments: async ({ id }, _, { dataSources }, { variableValues }) => {

@@ -41,4 +41,12 @@ const mapOcMetaToGql = (meta) => {
     }
 }
 
-module.exports = {mapOcAssignmentToGql, mapOcAddressToGql, mapOcMetaToGql}
+const mapOcBuyerToGql = (buyer) => {
+    return {
+        id: buyer.ID,
+        name: buyer.Name,
+        description: buyer.Description
+    }
+}
+
+module.exports = {mapOcAssignmentToGql, mapOcAddressToGql, mapOcMetaToGql, mapOcBuyerToGql}
