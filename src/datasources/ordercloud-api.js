@@ -29,15 +29,15 @@ class OrderCloudAPI extends RESTDataSource {
     }
 
     getUserGroup(buyerID, id) {
-        return this.get(`/buyers/${buyerID}/usergroups/${id}?pageSize=100`)
+        return this.get(`/buyers/${buyerID}/usergroups/${id}`)
     }
 
     getUser(buyerID, id) {
-        return this.get(`/buyers/${buyerID}/users/${id}?pageSize=100`)
+        return this.get(`/buyers/${buyerID}/users/${id}`)
     }
 
     getBuyer(buyerID) {
-        return this.get(`/buyers/${buyerID}?pageSize=100`)
+        return this.get(`/buyers/${buyerID}`)
     }
 }
 
