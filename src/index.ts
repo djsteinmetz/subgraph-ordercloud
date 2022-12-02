@@ -4,14 +4,14 @@ const {readFileSync} = require('fs');
 
 const typeDefs = gql(readFileSync('./src/ordercloud.graphql', {encoding: 'utf-8'}));
 const resolvers = require('./resolvers');
-const OrderCloudAPI = require('./datasources/ordercloud-api');
+const OcAPI = require('./datasources/ordercloud-api.ts');
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources: () => {
     return {
-      ordercloudAPI: new OrderCloudAPI()
+      ordercloudAPI: new OcAPI()
     };
   },
   context: ({req}) => {

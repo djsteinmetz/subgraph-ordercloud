@@ -3,7 +3,6 @@ const resolvers = {
   Query: {
     addresses: async (_, { buyerID, pageSize, page, search, searchOn }, { dataSources }) => {
       const addressesListPage = await dataSources.ordercloudAPI.getAllAddresses(buyerID, pageSize, page, search, searchOn)
-      console.log(addressesListPage)
       return {
         meta: mapOcMetaToGql(addressesListPage.Meta),
         items: addressesListPage.Items.map(a => {
@@ -15,9 +14,8 @@ const resolvers = {
       const assignments = await dataSources.ordercloudAPI.getAddressAssignments(buyerID, id, pageSize, page, userID, groupID, level)
       return mapOcAssignmentToGql(assignments.Items, assignments.Meta, buyerID)
     },
-    address: async (_, { buyerID, id }, { dataSources, token }) => {
+    address: async (_, { buyerID, id }, { dataSources }) => {
       const address = await dataSources.ordercloudAPI.getAddress(buyerID, id);
-      console.log(address)
       return mapOcAddressToGql(address)
     },
     buyer: async(_, { buyerID }, { dataSources }) => {

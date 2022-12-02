@@ -1,3 +1,5 @@
+import IGqlAddress from "../models/gql-address.interface"
+
 const mapOcAssignmentToGql = (assignments, meta, buyerId) => {
     return {
         meta: mapOcMetaToGql(meta),
@@ -14,7 +16,7 @@ const mapOcAssignmentToGql = (assignments, meta, buyerId) => {
     }
 }
 
-const mapOcAddressToGql = (address) => {
+const mapOcAddressToGql = (address): IGqlAddress => {
     return {
         id: address.ID,
         addressName: address.AddressName,
